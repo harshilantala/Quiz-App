@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quizapp/utilities/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../SubjectSelectionPage.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,8 +13,41 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  Widget _buildEmailTF() {
+  void signup() async {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      CustomAlertBox(context, "Enter Required Fields ");
+    } else {
+      UserCredential? userCredential;
+      try {
+        userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+      } on FirebaseAuthException catch (ex) {
+        CustomAlertBox(context, ex.code.toString());
+      }
+    }
+  }
+
+
+
+
+
+  static CustomAlertBox(BuildContext context , String text){
+    return showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(
+        title: Text(text),
+      );
+    });
+  }
+
+  Widget _buildEmailTF(TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -24,6 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: controller,
             keyboardType: TextInputType.emailAddress,
             style: TextStyle(
               color: Colors.white,
@@ -45,7 +83,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildPasswordTF() {
+  Widget _buildPasswordTF(TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -59,6 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
           decoration: kBoxDecorationStyle,
           height: 60.0,
           child: TextField(
+            controller: controller,
             obscureText: true,
             style: TextStyle(
               color: Colors.white,
@@ -79,6 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ],
     );
   }
+
 
   Widget _buildForgotPasswordBtn() {
     return Container(
@@ -125,19 +165,41 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  void handleLogin() {
+
+  }
+
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () => print('Login Button Pressed'),
-        style: ElevatedButton.styleFrom(
-          elevation: 5.0,
-          padding: EdgeInsets.all(15.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30.0),
+        onPressed: () {
+          //Authentication Logic
+          String email = emailController.text.trim();
+          String password = passwordController.text.trim();
+
+          if (email.isEmpty || password.isEmpty) {
+            CustomAlertBox(context, "Enter Required Fields ");
+          } else {
+            signup();
+          }
+
+          //Navigate to the Next page
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+          );
+        },
+        style: ButtonStyle(
+          elevation: MaterialStateProperty.all(5.0),
+          padding: MaterialStateProperty.all(EdgeInsets.all(15.0)),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
           ),
-          primary: Colors.white,
+          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         ),
         child: Text(
           'LOGIN',
@@ -152,6 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
 
 
   Widget _buildSignInWithText() {
@@ -296,11 +359,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(height: 30.0),
-                      _buildEmailTF(),
+                      _buildEmailTF(emailController),
                       SizedBox(
                         height: 30.0,
                       ),
-                      _buildPasswordTF(),
+                      _buildPasswordTF(passwordController),
                       _buildForgotPasswordBtn(),
                       _buildRememberMeCheckbox(),
                       _buildLoginBtn(),
