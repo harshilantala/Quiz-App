@@ -28,6 +28,7 @@
 import 'package:flutter/material.dart';
 import 'package:quizapp/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:quizapp/screens/signup.dart';
 
 
 import 'SubjectSelectionPage.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Quiz App',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      home: SignupScreen(),
     );
   }
 }
