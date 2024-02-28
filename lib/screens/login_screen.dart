@@ -4,6 +4,8 @@ import 'package:quizapp/screens/signup.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../SubjectSelectionPage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -213,9 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 
-
-
-
   Widget _buildSignInWithText() {
     return Column(
       children: <Widget>[
@@ -235,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _buildSocialBtn(Function() onTap, AssetImage logo) {
+    Widget _buildSocialBtn(Function() onTap, AssetImage logo) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -272,7 +271,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
           _buildSocialBtn(
-            () => print('Login with Google'),
+            () => _signInWithGoogle(),
             AssetImage(
               'assets/logos/google.jpg',
             ),
@@ -280,6 +279,39 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       ),
     );
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) {
+        // User cancelled Google sign-in
+        return;
+      }
+
+      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in with Firebase using the credential
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Navigate to the next screen after successful sign-in
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SubjectSelectionPage(),
+        ),
+      );
+    } catch (e) {
+      // Handle sign-in errors
+      print('Error signing in with Google: $e');
+      // Show error dialog or provide feedback to the user
+    }
   }
 
   Widget _buildSignupBtn(BuildContext context) {
