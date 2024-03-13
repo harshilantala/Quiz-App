@@ -26,12 +26,15 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:quizapp/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:quizapp/screens/signup.dart';
+import 'package:syncfusion_flutter_core/core.dart';
 
 
-import 'SubjectSelectionPage.dart';
+
+import 'screens/SubjectSelectionPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,15 +47,24 @@ void main() async {
       // other configurations...
     ),
   );
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserNotifier(),
+      child: MyApp(),
+    ),
+    // MyApp(),
+  );
+  SyncfusionLicense.registerLicense("YOUR_SYNC_FUSION_LICENSE_KEY");
 }
 
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // theme: ThemeData(primarySwatch: Colors.green),
       title: 'Quiz App',
       debugShowCheckedModeBanner: false,
       home: SignupScreen(),

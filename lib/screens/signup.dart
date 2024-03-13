@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:quizapp/SubjectSelectionPage.dart';
+import 'package:quizapp/screens/SubjectSelectionPage.dart';
 
 import 'login_screen.dart';
 
@@ -21,6 +22,7 @@ class _SignupScreenState extends State<SignupScreen> {
   void signup() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
+    String name = nameController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
       CustomAlertBox(context, "Enter Required Fields ");
@@ -32,7 +34,17 @@ class _SignupScreenState extends State<SignupScreen> {
           email: email,
           password: password,
         );
+        //==========================================================
+        UserNotifier userNotifier =
+        Provider.of<UserNotifier>(context, listen: false);
+        userNotifier.updateUserName(name);
+        //============================================================
+
         // You can add additional logic or navigate to another page after successful signup
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+        );
       } on FirebaseAuthException catch (ex) {
         CustomAlertBox(context, ex.code.toString());
       }

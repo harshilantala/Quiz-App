@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:quizapp/screens/signup.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../SubjectSelectionPage.dart';
+import 'SubjectSelectionPage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 

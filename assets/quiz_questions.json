@@ -1,0 +1,51 @@
+{
+  "subjects": [
+    {
+      "name": "HTML",
+      "questions": [
+        {
+          "id": 1,
+          "question": "HTML stands for -",
+          "options": ["HighText Machine Language", "HyperText and links Markup Language", "HyperText Markup Language", "None of these"],
+          "correctOption": 2
+        },
+        {
+          "id": 2,
+          "question": " The correct sequence of HTML tags for starting a webpage is -",
+          "options": ["Head, Title, HTML, body", "HTML, Body, Title, Head", "HTML, Body, Title, Head", "HTML, Head, Title, Body"],
+          "correctOption": 3
+        },
+        {
+          "id": 3,
+          "question": "Which of the following element is responsible for making the text bold in HTML?",
+          "options": ["<pre>", "<a>", "<b>", "<br>"],
+          "correctOption": 2
+        }
+      ]
+    },
+
+    {
+      "name": "CSS",
+      "questions": [
+        {
+          "id": 1,
+          "question": "CSS stands for -",
+          "options": ["Cascade style sheets", "Color and style sheets", "Cascading style sheets", "None of the above"],
+          "correctOption": 2
+        },
+        {
+          "id": 2,
+          "question": " Which of the following is the correct syntax for referring the external style sheet?",
+          "options": ["<style src = example.css>", "<style src = \"example.css\" >", "<stylesheet> example.css </stylesheet>", "<link rel=\"stylesheet\" type=\"text/css\" href=\"example.css\">"],
+          "correctOption": 3
+        },
+        {
+          "id": 3,
+          "question": "The property in CSS used to change the background color of an element is -",
+          "options": ["bgcolor", "color", "background-color", "All of the above"],
+          "correctOption": 2
+        }
+      ]
+    }
+  ]
+}
