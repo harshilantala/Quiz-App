@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quizapp/screens/signup.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'SubjectSelectionPage.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
+import '../SubjectSelectionPage.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -26,8 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       UserCredential? userCredential;
       try {
-        userCredential =
-            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
@@ -37,14 +35,16 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  static CustomAlertBox(BuildContext context, String text) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(text),
-          );
-        });
+
+
+
+
+  static CustomAlertBox(BuildContext context , String text){
+    return showDialog(context: context, builder: (BuildContext context){
+      return AlertDialog(
+        title: Text(text),
+      );
+    });
   }
 
   Widget _buildEmailTF(TextEditingController controller) {
@@ -119,6 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+
   Widget _buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
@@ -135,60 +136,60 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+
+  Widget _buildRememberMeCheckbox() {
+    return Container(
+      height: 20.0,
+      child: Row(
+        children: <Widget>[
+          Theme(
+            data: ThemeData(unselectedWidgetColor: Colors.white),
+            child: Checkbox(
+              value: _rememberMe,
+              checkColor: Colors.green,
+              activeColor: Colors.white,
+              onChanged: (value) {
+                setState(() {
+                  _rememberMe = value ?? false; // Provide a default value (false in this case)
+                });
+              },
+
+            ),
+          ),
+          Text(
+            'Remember me',
+            style: kLabelStyle,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void handleLogin() {
+
+  }
+
   Widget _buildLoginBtn() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () async {
-          // Authentication Logic
+        onPressed: () {
+          //Authentication Logic
           String email = emailController.text.trim();
           String password = passwordController.text.trim();
 
           if (email.isEmpty || password.isEmpty) {
-            CustomAlertBox(context, "Enter Required Fields");
+            CustomAlertBox(context, "Enter Required Fields ");
           } else {
-            try {
-              // Attempt to sign in
-              await FirebaseAuth.instance.signInWithEmailAndPassword(
-                email: email,
-                password: password,
-              );
-
-              // If successful, navigate to the next page
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SubjectSelectionPage(),
-                ),
-              );
-            } catch (ex, stackTrace) {
-              // Print entire exception details for debugging
-              print("Exception during login: $ex");
-              print("Stack Trace: $stackTrace");
-
-              // Handle specific authentication exceptions
-              String errorMessage = '';
-
-              if (ex is FirebaseAuthException) {
-                if (ex.code == 'user-not-found') {
-                  errorMessage = 'No account found with this email. Please sign up.';
-                } else if (ex.code == 'wrong-password') {
-                  errorMessage = 'Incorrect password. Please try again.';
-                } else if (ex.code == 'invalid-email') {
-                  errorMessage = 'Invalid email address format.';
-                } else if (ex.code == 'too-many-requests') {
-                  errorMessage = 'Too many unsuccessful login attempts. Try again later.';
-                } else {
-                  errorMessage = 'Authentication failed. Please try again.';
-                }
-              } else {
-                errorMessage = 'Unexpected error during authentication. Please try again.';
-              }
-
-              CustomAlertBox(context, errorMessage);
-            }
+            signup();
           }
+
+          //Navigate to the Next page
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+          );
         },
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(5.0),
@@ -215,6 +216,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 
+
   Widget _buildSignInWithText() {
     return Column(
       children: <Widget>[
@@ -234,7 +236,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-    Widget _buildSocialBtn(Function() onTap, AssetImage logo) {
+  Widget _buildSocialBtn(Function() onTap, AssetImage logo) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -258,6 +260,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+
   Widget _buildSocialBtnRow() {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 30.0),
@@ -265,13 +268,13 @@ class _LoginScreenState extends State<LoginScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildSocialBtn(
-            () => print('Login with Facebook'),
+                () => print('Login with Facebook'),
             AssetImage(
               'assets/logos/facebook.jpg',
             ),
           ),
           _buildSocialBtn(
-            () => _signInWithGoogle(),
+                () => print('Login with Google'),
             AssetImage(
               'assets/logos/google.jpg',
             ),
@@ -281,48 +284,9 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Future<void> _signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-      if (googleUser == null) {
-        // User cancelled Google sign-in
-        return;
-      }
-
-      final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-
-      // Sign in with Firebase using the credential
-      await FirebaseAuth.instance.signInWithCredential(credential);
-
-      // Navigate to the next screen after successful sign-in
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SubjectSelectionPage(),
-        ),
-      );
-    } catch (e) {
-      // Handle sign-in errors
-      print('Error signing in with Google: $e');
-      // Show error dialog or provide feedback to the user
-    }
-  }
-
-  Widget _buildSignupBtn(BuildContext context) {
+  Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => {
-        // Handle subject selection here
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SignupScreen()),
-        ),
-      },
+      onTap: () => print('Sign Up Button Pressed'),
       child: RichText(
         text: TextSpan(
           children: [
@@ -386,21 +350,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        'Welcome Back',
+                        'Sign In',
                         style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'OpenSans',
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'Login to your account',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'OpenSans',
-                          fontSize: 13.0,
-                          // fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(height: 30.0),
@@ -410,11 +365,11 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       _buildPasswordTF(passwordController),
                       _buildForgotPasswordBtn(),
-                      // _buildRememberMeCheckbox(),
+                      _buildRememberMeCheckbox(),
                       _buildLoginBtn(),
                       _buildSignInWithText(),
                       _buildSocialBtnRow(),
-                      _buildSignupBtn(context),
+                      _buildSignupBtn(),
                     ],
                   ),
                 ),

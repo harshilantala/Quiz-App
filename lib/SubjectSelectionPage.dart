@@ -10,6 +10,7 @@ class SubjectSelectionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Select a Subject'),
         backgroundColor: Color(0xFF478DE0),
+
       ),
       backgroundColor: Color(0xFF61A4F1),
 
