@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:quizapp/screens/SubjectSelectionPage.dart';
+import 'package:quizapp/screens/signup.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../SubjectSelectionPage.dart';
-
+import 'package:flutter/services.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -12,32 +12,57 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool _rememberMe = false;
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  bool _firstTimeLogin = true;
 
-  void signup() async {
+  bool _rememberMe = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    checkFirstTimeLogin();
+  }
+
+  void checkFirstTimeLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool isFirstTimeLogin = prefs.getBool('firstTimeLogin') ?? true;
+    setState(() {
+      _firstTimeLogin = isFirstTimeLogin;
+    });
+  }
+
+  void saveFirstTimeLogin() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('firstTimeLogin', false);
+  }
+
+  void login() async {
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
       CustomAlertBox(context, "Enter Required Fields ");
     } else {
-      UserCredential? userCredential;
       try {
-        userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
+        );
+        if (_firstTimeLogin) {
+          CustomAlertBox(context, "You don't have an account yet. Please sign up.");
+        }
+        saveFirstTimeLogin(); // Update first time login flag after first login
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
         );
       } on FirebaseAuthException catch (ex) {
         CustomAlertBox(context, ex.code.toString());
       }
     }
   }
-
-
-
-
 
   static CustomAlertBox(BuildContext context , String text){
     return showDialog(context: context, builder: (BuildContext context){
@@ -182,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
           if (email.isEmpty || password.isEmpty) {
             CustomAlertBox(context, "Enter Required Fields ");
           } else {
-            signup();
+            login();
           }
 
           //Navigate to the Next page
@@ -286,7 +311,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _buildSignupBtn() {
     return GestureDetector(
-      onTap: () => print('Sign Up Button Pressed'),
+      onTap: () {
+        // Navigate to the signup screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SignupScreen()),
+        );
+      },
       child: RichText(
         text: TextSpan(
           children: [
@@ -311,6 +342,7 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {

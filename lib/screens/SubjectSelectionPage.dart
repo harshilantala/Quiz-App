@@ -16,13 +16,15 @@ class UserNotifier extends ChangeNotifier {
 class SubjectSelectionPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final List<Map<String, String>> subjects = [
-    {'name': 'HTML', 'image': 'html.png'},
+    {'name': 'HTML', 'image': 'HTML.png'},
     {'name': 'CSS', 'image': 'css.png'},
-    {'name': 'Java', 'image': 'java.png'},
-    {'name': 'Python', 'image': 'python.png'},
+    {'name': 'JAVA', 'image': 'java.png'},
+    {'name': 'PYTHON', 'image': 'python.png'},
     {'name': 'C', 'image': 'c.png'},
     {'name': 'C++', 'image': 'c++.png'}
   ];
+
+  SubjectSelectionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,19 +56,75 @@ class SubjectSelectionPage extends StatelessWidget {
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Colors.deepPurple[300]!, Colors.deepPurple[500]!],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                color: Colors.blue,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundColor: Colors.white,
+                      child: userNotifier.userName.isNotEmpty
+                          ? Text(
+                        userNotifier.userName[0].toUpperCase(),
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 40,
+                        ),
+                      )
+                          : Icon(
+                        Icons.person,
+                        size: 60,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '${userNotifier.userName ?? 'Guest'}',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Text(
-                'Welcome, ${userNotifier.userName}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18.0,
-                ),
-              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.assignment),
+              title: Text('My Quiz'),
+              onTap: () {
+                // Add navigation to 'My Quiz' screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.score),
+              title: Text('Score'),
+              onTap: () {
+                // Add navigation to 'Score' screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About Us'),
+              onTap: () {
+                // Add navigation to 'About Us' screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.privacy_tip),
+              title: Text('Privacy Policy'),
+              onTap: () {
+                // Add navigation to 'Privacy Policy' screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.article),
+              title: Text('Terms and Conditions'),
+              onTap: () {
+                // Add navigation to 'Terms and Conditions' screen
+              },
             ),
           ],
         ),
@@ -90,11 +148,11 @@ class SubjectSelectionPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.black87,
                 ),
               ),
             ),
-            Expanded(
+            Expanded( // Wrap with Expanded
               child: GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -134,7 +192,7 @@ class SubjectCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          _navigateToQuizScreen(context, subject);
+          _showDifficultyDialog(context, subject);
         },
         borderRadius: BorderRadius.circular(15.0),
         child: Column(
@@ -167,14 +225,44 @@ class SubjectCard extends StatelessWidget {
     );
   }
 
-  void _navigateToQuizScreen(BuildContext context, String subject) async {
+  void _showDifficultyDialog(BuildContext context, String subject) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Select Difficulty"),
+          content: DropdownButton<String>(
+            value: 'Easy', // Default value
+            style: TextStyle(color: Colors.blue, fontSize: 18.0), // Styling for the dropdown menu
+            onChanged: (String? newValue) {
+              Navigator.pop(context); // Close the dialog
+              if (newValue != null) {
+                _navigateToQuizScreen(context, subject, newValue);
+              }
+            },
+            items: <String>['Easy', 'Medium', 'Hard'].map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(
+                  value,
+                  style: TextStyle(fontSize: 16.0),
+                ),
+              );
+            }).toList(),
+          ),
+        );
+      },
+    );
+  }
+
+  void _navigateToQuizScreen(BuildContext context, String subject, String difficulty) async {
     try {
-      List<QuizQuestion> quizQuestions = await quizService.loadQuestions(subject);
+      List<QuizQuestion> quizQuestions = await quizService.loadQuestions(subject, difficulty);
 
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizScreen(questions: quizQuestions),
+          builder: (context) => QuizScreen(questions: quizQuestions, selectedSubject: subject),
         ),
       );
     } catch (e) {

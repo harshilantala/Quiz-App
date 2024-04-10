@@ -1,35 +1,10 @@
-// import 'package:flutter/material.dart';
-// import 'package:quizapp/Pages/login_page.dart';
-//
-// void main() {
-//   runApp(const MyApp());
-// }
-//
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-//
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         title: 'Flutter Demo',
-//         debugShowCheckedModeBanner: false,
-//         theme: ThemeData(
-//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-//           useMaterial3: true,
-//         ),
-//         home: const LoginPage(title: 'Welcome'),
-//
-//         // const HomePage({super.key, required this.email});
-//         );
-//   }
-// }
 
 import 'package:flutter/material.dart';
-import 'package:quizapp/screens/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-
+import 'package:provider/provider.dart';
+import 'package:quizapp/screens/SubjectSelectionPage.dart';
+import 'package:quizapp/screens/login_screen.dart';
+import 'package:quizapp/screens/signup.dart';
 import 'SubjectSelectionPage.dart';
 
 void main() async {
@@ -43,9 +18,13 @@ void main() async {
       // other configurations...
     ),
   );
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => UserNotifier(),
+      child: MyApp(),
+    ),
+  );
 }
-
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -54,7 +33,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Quiz App',
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      initialRoute: '/', // Specify the initial route
+      routes: {
+        '/': (context) => LoginScreen(), // Set the initial route to LoginScreen
+        '/signup': (context) => SignupScreen(),
+      },
     );
   }
 }

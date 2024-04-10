@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'quiz_question.dart';
 
 class QuizService {
-  Future<List<QuizQuestion>> loadQuestions(String subject) async {
+  Future<List<QuizQuestion>> loadQuestions(String subject, String difficulty) async {
     String jsonString = await rootBundle.loadString('assets/quiz_questions.json');
     List<dynamic> jsonList = json.decode(jsonString)['subjects'];
 
@@ -12,10 +12,15 @@ class QuizService {
 
     if (subjectData != null) {
       List<dynamic> questionsJson = subjectData['questions'];
-      List<QuizQuestion> questions = questionsJson.map((json) => QuizQuestion.fromJson(json)).toList();
+
+      // Filter questions based on difficulty
+      List<dynamic> filteredQuestions = questionsJson.where((question) => question['difficulty'] == difficulty).toList();
+
+      List<QuizQuestion> questions = filteredQuestions.map((json) => QuizQuestion.fromJson(json)).toList();
       return questions;
     } else {
       throw Exception('Subject not found');
     }
   }
 }
+

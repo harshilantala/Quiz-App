@@ -4,12 +4,14 @@ import 'quiz_question.dart';
 
 class QuizScreen extends StatefulWidget {
   final List<QuizQuestion> questions;
+  final String selectedSubject; // Add this parameter
 
-  QuizScreen({required this.questions});
+  QuizScreen({required this.questions, required this.selectedSubject});
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
 }
+
 
 class _QuizScreenState extends State<QuizScreen> {
   int currentIndex = 0;
@@ -21,19 +23,63 @@ class _QuizScreenState extends State<QuizScreen> {
   @override
   void initState() {
     super.initState();
-    selectedOptions = List<int?>.filled(widget.questions.length, null);
+    if (widget.questions.isNotEmpty) {
+      selectedOptions = List<int?>.filled(widget.questions.length, null);
+    } else {
+      // Handle the case when widget.questions is empty
+      selectedOptions = [];
+    }
     startTimer();
   }
 
+
   @override
   Widget build(BuildContext context) {
+    if (widget.questions.isEmpty) {
+      // Handle the case when widget.questions is empty
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Quiz Screen'),
+        ),
+        body: Center(
+          child: Text('No questions available.'),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz Screen'),
+        title: Text('${widget.selectedSubject} Quiz'),
       ),
       backgroundColor: Color(0xFF5170FD),
+
       body: Column(
         children: [
+          SizedBox(height: 30),
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: 80,
+                height: 80,
+                child: CircularProgressIndicator(
+                  value: questionTimerSeconds / 10, // Adjust the value according to your timer duration
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white), // Customize the color
+                  backgroundColor: Colors.grey, // Customize the background color
+                  strokeWidth: 8, // Adjust the thickness of the circular progress indicator
+                ),
+              ),
+              Text(
+                '$questionTimerSeconds',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 10),
           Padding(
             padding: EdgeInsets.all(16.0),
             child: Card(
@@ -61,10 +107,6 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
           ),
           SizedBox(height: 10),
-          Text(
-            '$questionTimerSeconds seconds left',
-            style: TextStyle(fontSize: 16, color: Colors.white),
-          ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -82,6 +124,7 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
     );
   }
+
 
   Widget _buildQuestionCard(QuizQuestion quizQuestion) {
     return Padding(
@@ -118,7 +161,8 @@ class _QuizScreenState extends State<QuizScreen> {
       String option = entry.value;
 
       bool isCorrect = index == correctOption;
-      bool isSelected = selectedOptions.isNotEmpty ? selectedOptions[currentIndex] == index : false;
+      bool isSelected = selectedOptions != null && selectedOptions.length > currentIndex && selectedOptions[currentIndex] != null && selectedOptions[currentIndex] == index;
+
 
       return ListTile(
         title: Text(
@@ -128,6 +172,9 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
         ),
         onTap: () {
+          if (selectedOptions.length <= currentIndex) {
+            selectedOptions.addAll(List<int?>.filled(currentIndex + 1 - selectedOptions.length, null));
+          }
           setState(() {
             selectedOptions[currentIndex] = index;
           });

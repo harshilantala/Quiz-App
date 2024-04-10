@@ -74,58 +74,58 @@
 
 
 
-import 'package:flutter/material.dart';
-import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
-
-class PDFViewer extends StatefulWidget {
-  @override
-  _PDFViewerState createState() => _PDFViewerState();
-}
-
-class _PDFViewerState extends State<PDFViewer> {
-  late PDFDocument document;
-  bool _pdfReady = false;
-
-  @override
-  void initState() {
-    super.initState();
-    loadPDF();
-  }
-
-  Future<void> loadPDF() async {
-    document = await PDFDocument.fromAsset('assets/pdfs/HTML_material.pdf');
-    setState(() {
-      _pdfReady = true;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('PDF Viewer'),
-      ),
-      body: _pdfReady
-          ? PDFViewer()
-          : Center(
-        child: CircularProgressIndicator(),
-      ),
-    );
-  }
-}
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: PDFViewer(),
-    );
-  }
-}
+// import 'package:flutter/material.dart';
+// import 'package:advance_pdf_viewer/advance_pdf_viewer.dart';
+//
+// class PDFViewer extends StatefulWidget {
+//   @override
+//   _PDFViewerState createState() => _PDFViewerState();
+// }
+//
+// class _PDFViewerState extends State<PDFViewer> {
+//   late PDFDocument document;
+//   bool _pdfReady = false;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     loadPDF();
+//   }
+//
+//   Future<void> loadPDF() async {
+//     document = await PDFDocument.fromAsset('assets/pdfs/HTML_material.pdf');
+//     setState(() {
+//       _pdfReady = true;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('PDF Viewer'),
+//       ),
+//       body: _pdfReady
+//           ? PDFViewer()
+//           : Center(
+//         child: CircularProgressIndicator(),
+//       ),
+//     );
+//   }
+// }
+//
+// void main() {
+//   runApp(MyApp());
+// }
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: PDFViewer(),
+//     );
+//   }
+// }
 
 
 

@@ -218,7 +218,7 @@ class _SignupScreenState extends State<SignupScreen> {
           padding: EdgeInsets.symmetric(vertical: 25.0),
           width: double.infinity,
           child: ElevatedButton(
-            onPressed: () {
+            onPressed: () async {
               // Authentication Logic
               String email = emailController.text.trim();
               String password = passwordController.text.trim();
@@ -231,13 +231,24 @@ class _SignupScreenState extends State<SignupScreen> {
                 CustomAlertBox(context, "Passwords do not match");
               } else {
                 // Proceed with signup logic
-                signup();
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+                  // User successfully signed up
+                  UserNotifier userNotifier = Provider.of<UserNotifier>(context, listen: false);
+                  userNotifier.updateUserName(name);
 
-                // Navigate to the Next page
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
-                );
+                  // Navigate to the Next page
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+                  );
+                } on FirebaseAuthException catch (ex) {
+                  // Handle signup errors
+                  CustomAlertBox(context, ex.code.toString());
+                }
               }
             },
             style: ButtonStyle(
@@ -277,6 +288,7 @@ class _SignupScreenState extends State<SignupScreen> {
       ],
     );
   }
+
 
 
   @override
