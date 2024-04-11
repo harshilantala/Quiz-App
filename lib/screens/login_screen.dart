@@ -6,6 +6,7 @@ import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -195,27 +196,26 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildLoginBtn() {
+    bool isValidFields() {
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
+      return email.isNotEmpty && password.isNotEmpty;
+    }
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {
-          //Authentication Logic
+        onPressed: isValidFields()
+            ? () {
+          // Authentication Logic
           String email = emailController.text.trim();
           String password = passwordController.text.trim();
 
-          if (email.isEmpty || password.isEmpty) {
-            CustomAlertBox(context, "Enter Required Fields ");
-          } else {
-            login();
-          }
-
-          //Navigate to the Next page
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
-          );
-        },
+          // Call login method only if fields are valid
+          login();
+        }
+            : null, // Disable the button if fields are not valid
         style: ButtonStyle(
           elevation: MaterialStateProperty.all(5.0),
           padding: MaterialStateProperty.all(EdgeInsets.all(15.0)),
