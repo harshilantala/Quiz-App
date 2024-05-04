@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'QuizResultsScreen.dart';
 import 'quiz_question.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -309,26 +310,38 @@ class _QuizScreenState extends State<QuizScreen> {
       }
     }
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Quiz Results'),
-          content: Text(
-              'Correct Answers: $correctAnswers out of ${widget.questions.length}'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the results dialog
-                Navigator.of(context).pop(); // Close the QuizScreen
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizResultsScreen(
+          correctAnswers: correctAnswers,
+          totalQuestions: widget.questions.length,
+        ),
+      ),
     );
   }
+
+
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return AlertDialog(
+  //         title: Text('Quiz Results'),
+  //         content: Text(
+  //             'Correct Answers: $correctAnswers out of ${widget.questions.length}'),
+  //         actions: <Widget>[
+  //           TextButton(
+  //             onPressed: () {
+  //               Navigator.of(context).pop(); // Close the results dialog
+  //               Navigator.of(context).pop(); // Close the QuizScreen
+  //             },
+  //             child: Text('OK'),
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
   void startTimer() {
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {

@@ -224,12 +224,12 @@ class _LoginScreenState extends State<LoginScreen> {
               borderRadius: BorderRadius.circular(30.0),
             ),
           ),
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+          backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFE3FEF7)),
         ),
         child: Text(
           'LOGIN',
           style: TextStyle(
-            color: Color(0xFF527DAA),
+            color: Color(0xFF135D66),
             letterSpacing: 1.5,
             fontSize: 18.0,
             fontWeight: FontWeight.bold,
@@ -292,12 +292,12 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          _buildSocialBtn(
-                () => print('Login with Facebook'),
-            AssetImage(
-              'assets/logos/facebook.jpg',
-            ),
-          ),
+          // _buildSocialBtn(
+          //       () => print('Login with Facebook'),
+          //   AssetImage(
+          //     'assets/logos/facebook.jpg',
+          //   ),
+          // ),
           _buildSocialBtn(
                 () => print('Login with Google'),
             AssetImage(
@@ -356,19 +356,20 @@ class _LoginScreenState extends State<LoginScreen> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF73AEF5),
-                      Color(0xFF61A4F1),
-                      Color(0xFF478DE0),
-                      Color(0xFF398AE5),
-                    ],
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                  ),
-                ),
+                // decoration: BoxDecoration(
+                //   gradient: LinearGradient(
+                //     begin: Alignment.topCenter,
+                //     end: Alignment.bottomCenter,
+                //     colors: [
+                //       Color(0xFF73AEF5),
+                //       Color(0xFF61A4F1),
+                //       Color(0xFF478DE0),
+                //       Color(0xFF398AE5),
+                //     ],
+                //     stops: [0.1, 0.4, 0.7, 0.9],
+                //   ),
+                // ),
+                color: Color(0xFF135D66),
               ),
               Container(
                 height: double.infinity,
