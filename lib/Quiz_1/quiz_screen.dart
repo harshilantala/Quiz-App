@@ -6,8 +6,11 @@ import 'quiz_question.dart';
 class QuizScreen extends StatefulWidget {
   final List<QuizQuestion> questions;
   final String selectedSubject; // Add this parameter
+  final String userEmail;
+  final String userName;
 
-  QuizScreen({required this.questions, required this.selectedSubject});
+  QuizScreen({required this.questions, required this.selectedSubject, required this.userEmail,
+    required this.userName});
 
   @override
   _QuizScreenState createState() => _QuizScreenState();
@@ -316,6 +319,8 @@ class _QuizScreenState extends State<QuizScreen> {
         builder: (context) => QuizResultsScreen(
           correctAnswers: correctAnswers,
           totalQuestions: widget.questions.length,
+          email: widget.userEmail, // Provide the user's email
+          name: widget.userName, // Provide the user's name
         ),
       ),
     );

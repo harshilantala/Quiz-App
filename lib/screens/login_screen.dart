@@ -5,7 +5,7 @@ import 'package:quizapp/screens/signup.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
-
+import 'package:quizapp/Quiz_1/send_email.dart'; // Import the send_email.dart file
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -16,9 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool _firstTimeLogin = true;
-
   bool _rememberMe = false;
-
+  String userEmail = '';
 
   @override
   void initState() {
@@ -51,13 +50,26 @@ class _LoginScreenState extends State<LoginScreen> {
           email: email,
           password: password,
         );
+
+        // Retrieve the user's name from SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        String? userName = prefs.getString('userName') ?? '';
+
+        // Send email after successful login
+        sendScoreViaEmail(userEmail, userName, 0, 0);
+
         if (_firstTimeLogin) {
           CustomAlertBox(context, "You don't have an account yet. Please sign up.");
         }
         saveFirstTimeLogin(); // Update first time login flag after first login
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+          MaterialPageRoute(
+            builder: (context) => SubjectSelectionPage(
+              userEmail: userEmail,
+              userName: userName,
+            ),
+          ),
         );
       } on FirebaseAuthException catch (ex) {
         CustomAlertBox(context, ex.code.toString());
@@ -145,7 +157,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
   Widget _buildForgotPasswordBtn() {
     return Container(
       alignment: Alignment.centerRight,
@@ -161,7 +172,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 
   Widget _buildRememberMeCheckbox() {
     return Container(
@@ -179,7 +189,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   _rememberMe = value ?? false; // Provide a default value (false in this case)
                 });
               },
-
             ),
           ),
           Text(
@@ -191,9 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  void handleLogin() {
-
-  }
+  void handleLogin() {}
 
   Widget _buildLoginBtn() {
     bool isValidFields() {
@@ -240,8 +247,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-
-
   Widget _buildSignInWithText() {
     return Column(
       children: <Widget>[
@@ -284,7 +289,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 
   Widget _buildSocialBtnRow() {
     return Padding(
@@ -342,7 +346,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

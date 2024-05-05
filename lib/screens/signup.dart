@@ -4,8 +4,12 @@ import 'package:provider/provider.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:quizapp/screens/SubjectSelectionPage.dart';
+import 'package:quizapp/screens/login_screen.dart';
 
-import 'login_screen.dart';
+import 'package:quizapp/Quiz_1/send_email.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Quiz_1/QuizResultsScreen.dart';
 
 class SignupScreen extends StatefulWidget {
   @override
@@ -34,16 +38,39 @@ class _SignupScreenState extends State<SignupScreen> {
           email: email,
           password: password,
         );
+
+        sendScoreViaEmail(email, name, 0, 0);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => QuizResultsScreen(
+              email: email,
+              name: name,
+              correctAnswers: 0, // Initialize with 0 correct answers
+              totalQuestions: 0, // Initialize with 0 total questions
+            ),
+          ),
+        );
         //==========================================================
         UserNotifier userNotifier =
         Provider.of<UserNotifier>(context, listen: false);
         userNotifier.updateUserName(name);
         //============================================================
 
+        // Save the user's name to SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('userName', name);
+
         // You can add additional logic or navigate to another page after successful signup
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+          MaterialPageRoute(
+            builder: (context) => SubjectSelectionPage(
+              // Pass userEmail and userName here
+              userEmail: email,
+              userName: name,
+            ),
+          ),
         );
       } on FirebaseAuthException catch (ex) {
         CustomAlertBox(context, ex.code.toString());
@@ -243,7 +270,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   // Navigate to the Next page
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SubjectSelectionPage()),
+                    MaterialPageRoute(
+                      builder: (context) => SubjectSelectionPage(
+                        userEmail: email,
+                        userName: name,
+                      ),
+                    ),
                   );
                 } on FirebaseAuthException catch (ex) {
                   // Handle signup errors

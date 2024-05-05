@@ -15,6 +15,8 @@ class UserNotifier extends ChangeNotifier {
 
 class SubjectSelectionPage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final String userEmail;
+  final String userName;
   final List<Map<String, String>> subjects = [
     {'name': 'HTML', 'image': 'HTML.png'},
     {'name': 'CSS', 'image': 'css.png'},
@@ -24,7 +26,8 @@ class SubjectSelectionPage extends StatelessWidget {
     {'name': 'C++', 'image': 'c++.png'}
   ];
 
-  SubjectSelectionPage({super.key});
+  SubjectSelectionPage({Key? key, required this.userEmail, required this.userName})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -170,6 +173,8 @@ class SubjectSelectionPage extends StatelessWidget {
                   return SubjectCard(
                     subject: subjects[index]['name']!,
                     imagePath: 'assets/logos/${subjects[index]['image']!}',
+                    userEmail: userEmail,
+                    userName: userName,
                   );
                 },
               ),
@@ -185,8 +190,15 @@ class SubjectCard extends StatelessWidget {
   final QuizService quizService = QuizService();
   final String subject;
   final String imagePath;
+  final String userEmail; // Add userEmail parameter
+  final String userName; // Add userName parameter
 
-  SubjectCard({required this.subject, required this.imagePath});
+  SubjectCard({
+    required this.subject,
+    required this.imagePath,
+    required this.userEmail, // Add this parameter to the constructor
+    required this.userName, // Add this parameter to the constructor
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -198,7 +210,7 @@ class SubjectCard extends StatelessWidget {
       color: Color(0xFF77B0AA),
       child: InkWell(
         onTap: () {
-          _showDifficultyDialog(context, subject);
+          _showDifficultyDialog(context, subject, userEmail, userName);
         },
         borderRadius: BorderRadius.circular(15.0),
 
@@ -232,7 +244,8 @@ class SubjectCard extends StatelessWidget {
     );
   }
 
-  void _showDifficultyDialog(BuildContext context, String subject) {
+  void _showDifficultyDialog(BuildContext context, String subject,
+      String userEmail, String userName) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -241,15 +254,19 @@ class SubjectCard extends StatelessWidget {
           backgroundColor: Color(0xFF77B0AA),
           content: Theme(
             data: Theme.of(context).copyWith(
-              canvasColor: Color(0xFF77B0AA), // Changing the dropdown's background color
+              canvasColor: Color(
+                  0xFF77B0AA), // Changing the dropdown's background color
             ),
             child: DropdownButton<String>(
-              value: 'Easy', // Default value
-              style: TextStyle(color: Colors.black, fontSize: 18.0), // Styling for the dropdown items
+              value: 'Easy',
+              // Default value
+              style: TextStyle(color: Colors.black, fontSize: 18.0),
+              // Styling for the dropdown items
               onChanged: (String? newValue) {
                 Navigator.pop(context); // Close the dialog
                 if (newValue != null) {
-                  _navigateToQuizScreen(context, subject, newValue);
+                  _navigateToQuizScreen(context, subject, newValue, userEmail,
+                      userName); // Pass userEmail and userName
                 }
               },
               items: <String>['Easy', 'Medium', 'Hard'].map((String value) {
@@ -269,14 +286,22 @@ class SubjectCard extends StatelessWidget {
   }
 
 
-  void _navigateToQuizScreen(BuildContext context, String subject, String difficulty) async {
+  void _navigateToQuizScreen(BuildContext context, String subject,
+      String difficulty, String userEmail, String userName) async {
     try {
-      List<QuizQuestion> quizQuestions = await quizService.loadQuestions(subject, difficulty);
+      List<QuizQuestion> quizQuestions = await quizService.loadQuestions(
+          subject, difficulty);
 
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => QuizScreen(questions: quizQuestions, selectedSubject: subject),
+          builder: (context) =>
+              QuizScreen(
+                questions: quizQuestions,
+                selectedSubject: subject,
+                userEmail: userEmail,
+                userName: userName,
+              ),
         ),
       );
     } catch (e) {
