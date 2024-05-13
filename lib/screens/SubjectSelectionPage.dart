@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import '../Quiz_1/quiz_question.dart';
 import '../Quiz_1/quiz_screen.dart';
 import '../Quiz_1/quiz_service.dart';
+import 'login_screen.dart';
+import 'about_us_page.dart';
 
 class UserNotifier extends ChangeNotifier {
   String userName = '';
@@ -10,6 +12,14 @@ class UserNotifier extends ChangeNotifier {
   void updateUserName(String name) {
     userName = name;
     notifyListeners();
+  }
+  void logout(BuildContext context) {
+    // You can perform any logout actions here, such as clearing user data, etc.
+    // For simplicity, let's just navigate back to the login page.
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => LoginScreen()),
+          (route) => false,
+    );
   }
 }
 
@@ -32,6 +42,8 @@ class SubjectSelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     UserNotifier userNotifier = Provider.of<UserNotifier>(context);
+    String userName = userNotifier.userName;
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -100,6 +112,11 @@ class SubjectSelectionPage extends StatelessWidget {
               style: TextStyle(color: Color(0xFF135D66), fontWeight: FontWeight.bold),
               ),
               onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SubjectSelectionPage(userEmail: '', userName: '',)),
+                );
+
                 // Add navigation to 'My Quiz' screen
               },
             ),
@@ -118,7 +135,10 @@ class SubjectSelectionPage extends StatelessWidget {
                 style: TextStyle(color: Color(0xFF135D66), fontWeight: FontWeight.bold),
               ),
               onTap: () {
-                // Add navigation to 'About Us' screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutUsPage()),
+                );
               },
             ),
             ListTile(
@@ -137,6 +157,16 @@ class SubjectSelectionPage extends StatelessWidget {
               ),
               onTap: () {
                 // Add navigation to 'Terms and Conditions' screen
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.logout, color: Color(0xFF135D66)),
+              title: Text('Logout',
+                style: TextStyle(color: Color(0xFF135D66), fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                // Call the logout function from UserNotifier
+                Provider.of<UserNotifier>(context, listen: false).logout(context);
               },
             ),
           ],

@@ -73,15 +73,15 @@ class QuizResultsScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.white),
               ),
               SizedBox(height: 20),
-              Text(
-                'User Email: $email',
-                style: TextStyle(color: Colors.white),
-              ),
-              Text(
-                'User Name: $name',
-                style: TextStyle(color: Colors.white),
-              ),
-              SizedBox(height: 20),
+              // Text(
+              //   'User Email: $email',
+              //   style: TextStyle(color: Colors.white),
+              // ),
+              // Text(
+              //   'User Name: $name',
+              //   style: TextStyle(color: Colors.white),
+              // ),
+              // SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   // Call the function to send the email

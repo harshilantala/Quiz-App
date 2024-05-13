@@ -5,6 +5,7 @@ import 'package:quizapp/screens/signup.dart';
 import 'package:quizapp/utilities/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quizapp/Quiz_1/send_email.dart'; // Import the send_email.dart file
 
 class LoginScreen extends StatefulWidget {
@@ -19,10 +20,34 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
   String userEmail = '';
 
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
+
   @override
   void initState() {
     super.initState();
     checkFirstTimeLogin();
+  }
+
+  Future<void> _handleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      if (googleUser != null) {
+        final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+        final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+        final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+        final User? user = userCredential.user;
+        // Handle successful login
+        // You can navigate to the next screen or perform any other action here
+      } else {
+        // User canceled the sign-in process
+      }
+    } catch (error) {
+      // Handle sign-in errors
+      print('Error signing in with Google: $error');
+    }
   }
 
   void checkFirstTimeLogin() async {
@@ -51,9 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
           password: password,
         );
 
-        // Retrieve the user's name from SharedPreferences
+        // Retrieve user data including name from authentication service
+        String userName = ""; // Retrieve user's name from userCredential or your database
+
+        // Update the user's name in SharedPreferences
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        String? userName = prefs.getString('userName') ?? '';
+        await prefs.setString('userName', userName);
 
         // Send email after successful login
         sendScoreViaEmail(userEmail, userName, 0, 0);
@@ -62,6 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
           CustomAlertBox(context, "You don't have an account yet. Please sign up.");
         }
         saveFirstTimeLogin(); // Update first time login flag after first login
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -296,22 +325,22 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          // _buildSocialBtn(
-          //       () => print('Login with Facebook'),
-          //   AssetImage(
-          //     'assets/logos/facebook.jpg',
-          //   ),
-          // ),
+          // Add the Google Sign-In button
           _buildSocialBtn(
-                () => print('Login with Google'),
-            AssetImage(
-              'assets/logos/google.jpg',
-            ),
+            _handleSignIn, // Call the _handleSignIn method when the Google button is pressed
+            AssetImage('assets/logos/google.jpg'), // Use your Google logo image asset
           ),
+          // You can add more social buttons here if needed
+          // For example, a button for Facebook sign-in
+          // _buildSocialBtn(
+          //   () => print('Login with Facebook'),
+          //   AssetImage('assets/logos/facebook.jpg'),
+          // ),
         ],
       ),
     );
   }
+
 
   Widget _buildSignupBtn() {
     return GestureDetector(
