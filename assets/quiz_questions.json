@@ -464,6 +464,866 @@
           "difficulty": "Hard"
         }
       ]
+    },
+    {
+      "name": "JAVA",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What does JDK stand for?",
+          "options": ["Java Development Kit", "JavaScript Development Kit", "Java Developer Kit", "None of the above"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 2,
+          "question": "Which keyword is used to define a constant in Java?",
+          "options": ["final", "const", "static", "constant"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 3,
+          "question": "Which data type is used to store a single character in Java?",
+          "options": ["char", "Character", "string", "chr"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 4,
+          "question": "What is the output of the following code snippet?\nint x = 5;\nint y = 2;\nSystem.out.println(x / y);",
+          "options": ["2.5", "2", "2.0", "2.5 (after type conversion)"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 5,
+          "question": "Which statement is used to exit a loop in Java?",
+          "options": ["break", "exit", "continue", "stop"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 6,
+          "question": "What is the result of the following code snippet?\nString str = \"Hello\";\nstr += \" World\";\nSystem.out.println(str);",
+          "options": ["\"Hello\"", "\"World\"", "\"Hello World\"", "Compilation Error"],
+          "correctOption": 3,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 7,
+          "question": "Which keyword is used to create a new instance of a class in Java?",
+          "options": ["new", "create", "instance", "make"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 8,
+          "question": "What is the default value of the elements in an array of integers in Java?",
+          "options": ["0", "1", "-1", "null"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 9,
+          "question": "Which of the following statements is true about Java?",
+          "options": ["Java is a low-level programming language.", "Java is a platform-dependent language.", "Java supports multiple inheritance.", "Java is an interpreted"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 10,
+          "question": "Which keyword is used to define a constant in Java?",
+          "options": ["final", "const", "static", "constant"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 11,
+          "question": "How do you create a multidimensional array in Java?",
+          "options": ["int[][] arr = new int[3][3];", "int arr[][] = new int[3][3];", "int arr[3][3] = new int[][];", "int[] arr[3] = new int[3][];"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 12,
+          "question": "What is the correct way to declare a method in Java that does not return any value?",
+          "options": ["void methodName()", "int methodName()", "String methodName()", "None of the above"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 13,
+          "question": "Which of the following is not a valid keyword in Java?",
+          "options": ["interface", "string", "implements", "enum"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 14,
+          "question": "What is the output of the following code snippet?\nString str = \"Hello\";\nSystem.out.println(str.substring(0, 2));",
+          "options": ["Hello", "Hel", "He", "Ho"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 15,
+          "question": "What is the purpose of the 'static' keyword in Java?",
+          "options": ["To define a class as a subclass", "To declare a variable that belongs to the class", "To define a method that belongs to the class", "To define a variable that belongs to the instance"],
+          "correctOption": 3,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 16,
+          "question": "Which of the following is a valid method declaration in an interface in Java?",
+          "options": ["public void methodName() {}", "private void methodName() {}", "protected void methodName() {}", "static void methodName() {}"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 17,
+          "question": "What is the output of the following code snippet?\nint x = 5;\nSystem.out.println(x++);",
+          "options": ["6", "5", "Error", "0"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 18,
+          "question": "Which of the following is not a primitive data type in Java?",
+          "options": ["int", "float", "string", "boolean"],
+          "correctOption": 3,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 19,
+          "question": "What is the correct way to declare an array in Java?",
+          "options": ["int[] arr = new int[5];", "int arr[] = new int[5];", "int arr[5] = new int[];", "int[] arr[5] = new int[];"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 20,
+          "question": "What is the purpose of the 'this' keyword in Java?",
+          "options": ["To reference the current class object", "To create a new object", "To reference the parent class object", "To define a variable"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 21,
+          "question": "What is the correct syntax to create an object of a class in Java?",
+          "options": ["ClassName obj = new ClassName();", "ClassName obj();", "ClassName = new obj ClassName();", "None of the above"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 22,
+          "question": "What is the output of the following code snippet?\nint x = 10;\nint y = 20;\nSystem.out.println(x == y);",
+          "options": ["true", "false", "Error", "0"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 23,
+          "question": "What is the purpose of the 'super' keyword in Java?",
+          "options": ["To reference the parent class object", "To reference the current class object", "To create a new object", "To define a variable"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 24,
+          "question": "What is the output of the following code snippet?\nint[] arr = new int[5];\nSystem.out.println(arr.length);",
+          "options": ["5", "0", "Error", "null"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 25,
+          "question": "What is the purpose of the 'final' keyword in Java?",
+          "options": ["To define a class as a subclass", "To declare a variable that belongs to the class", "To define a method that belongs to the class", "To declare a constant"],
+          "correctOption": 4,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 26,
+          "question": "What is the output of the following code snippet?\nString str = \"Hello\";\nSystem.out.println(str.indexOf('o'));",
+          "options": ["0", "4", "-1", "Error"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 27,
+          "question": "Which of the following statements is true about the 'throw' keyword in Java?",
+          "options": ["It is used to define a new exception class", "It is used to create a new object", "It is used to throw an exception", "It is used to handle an exception"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 28,
+          "question": "What is the output of the following code snippet?\nint x = 5;\nSystem.out.println(x + 1);",
+          "options": ["5", "6", "Error", "0"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 29,
+          "question": "Which of the following is not a valid access specifier in Java?",
+          "options": ["public", "private", "protected", "friendly"],
+          "correctOption": 4,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 30,
+          "question": "What is the output of the following code snippet?\nint[] arr = {1, 2, 3, 4, 5};\nSystem.out.println(arr[5]);",
+          "options": ["1", "5", "Error", "0"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    {
+      "name": "PYTHON",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the output of the following code?\nprint(2 + 2 * 3)",
+          "options": ["8", "10", "12", "14"],
+          "correctOption": 3,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 2,
+          "question": "Which of the following is not a valid variable name in Python?",
+          "options": ["my_variable", "my-variable", "_my_variable", "1_my_variable"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 3,
+          "question": "How do you start writing a comment in Python?",
+          "options": ["// This is a comment", "# This is a comment", "// This is a comment //", "/* This is a comment */"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 4,
+          "question": "Which of the following data types is not supported in Python?",
+          "options": ["int", "float", "double", "str"],
+          "correctOption": 3,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 5,
+          "question": "How do you create a variable with a floating-point value in Python?",
+          "options": ["var x = 5.0", "float x = 5.0", "x = 5.0", "double x = 5.0"],
+          "correctOption": 3,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 6,
+          "question": "What is the output of the following code?\nprint('Hello ' + 'World')",
+          "options": ["Hello World", "Hello + World", "HelloWorld", "Error"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 7,
+          "question": "Which function is used to get user input in Python?",
+          "options": ["scanf", "input", "get_input", "user_input"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 8,
+          "question": "What is the output of the following code?\nprint(10 > 9)",
+          "options": ["True", "False", "10", "9"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 9,
+          "question": "Which of the following is a correct way to create a list in Python?",
+          "options": ["list = ()", "list = []", "list = {}", "list = < >"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 10,
+          "question": "What is the correct way to create a function in Python?",
+          "options": ["def myFunction():", "function myFunction():", "void myFunction():", "func myFunction():"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 11,
+          "question": "How do you comment out multiple lines in Python?",
+          "options": ["/* This is a comment */", "// This is a comment", "/* This is a comment", "# This is a comment"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 12,
+          "question": "Which keyword is used to define a function in Python?",
+          "options": ["func", "define", "def", "function"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 13,
+          "question": "What is the correct way to check if a key exists in a dictionary in Python?",
+          "options": ["if key in dictionary:", "if dictionary.hasKey(key):", "if key.exists(dictionary):", "if dictionary.containsKey(key):"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 14,
+          "question": "Which operator is used for exponentiation in Python?",
+          "options": ["^", "**", "*", "//"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 15,
+          "question": "What is the output of the following code?\nprint(10 / 3)",
+          "options": ["3.333333", "3", "3.0", "3.3333"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 16,
+          "question": "Which of the following is the correct syntax to access the value of a key in a dictionary in Python?",
+          "options": ["dictionary(key)", "dictionary.key", "dictionary[key]", "dictionary.get(key)"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 17,
+          "question": "What is the correct way to add an element to the end of a list in Python?",
+          "options": ["list.add(element)", "list.append(element)", "list.insert(element)", "list.push(element)"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 18,
+          "question": "Which of the following is not a valid Python data structure?",
+          "options": ["List", "Tuple", "Stack", "Queue"],
+          "correctOption": 3,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 19,
+          "question": "What does the 'pass' statement do in Python?",
+          "options": ["Skips the current iteration of a loop", "Returns a value from a function", "Does nothing", "Raises an exception"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 20,
+          "question": "What is the output of the following code?\nprint(len('Python'))",
+          "options": ["5", "6", "7", "Error"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 21,
+          "question": "Which of the following statements is true about tuples in Python?",
+          "options": ["Tuples are mutable", "Tuples can contain duplicate elements", "Tuples are ordered", "Tuples can be resized"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 22,
+          "question": "What is the correct way to define a tuple with a single element in Python?",
+          "options": ["tuple = (1)", "tuple = 1,", "tuple = (1,)", "tuple = (1, 1)"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 23,
+          "question": "Which of the following is not a valid Python keyword?",
+          "options": ["True", "False", "None", "null"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 24,
+          "question": "What is the output of the following code?\nprint('Python'[3:])",
+          "options": ["Pyth", "tho", "hon", "on"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 25,
+          "question": "What is the correct way to delete a key-value pair from a dictionary in Python?",
+          "options": ["del dictionary[key]", "delete dictionary[key]", "remove dictionary[key]", "pop dictionary[key]"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 26,
+          "question": "What is the output of the following code?\nprint('Python'.replace('P', 'J'))",
+          "options": ["Python", "Jython", "Jython", "P"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 27,
+          "question": "Which of the following is a correct way to open a file in Python for reading?",
+          "options": ["file = open('filename.txt')", "file = open('filename.txt', 'r')", "file = open('filename.txt', 'w')", "file = open('filename.txt', 'a')"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 28,
+          "question": "What is the correct way to convert a string to lowercase in Python?",
+          "options": ["str.lower()", "str.toLower()", "str.lowercase()", "str.makeLower()"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 29,
+          "question": "What is the output of the following code?\nprint(10 == '10')",
+          "options": ["True", "False", "Error", "None"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 30,
+          "question": "Which of the following is used to create a set in Python?",
+          "options": ["{}", "()", "[]", "set()"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    {
+      "name": "C",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the syntax to declare a variable in C?",
+          "options": ["variable x;", "var x;", "int x;", "x = 10;"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 2,
+          "question": "Which symbol is used for comments in C?",
+          "options": ["//", "#", "/* */", "<!-- -->"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 3,
+          "question": "What is the output of the following code?\nprintf('%d', 5 > 3);",
+          "options": ["5", "3", "1", "0"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 4,
+          "question": "Which header file is required for input and output functions in C?",
+          "options": ["stdio.h", "stdlib.h", "math.h", "conio.h"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 5,
+          "question": "What is the size of 'int' data type in C?",
+          "options": ["4 bytes", "2 bytes", "8 bytes", "Depends on the compiler"],
+          "correctOption": 3,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 6,
+          "question": "How do you declare a function in C?",
+          "options": ["function myFunction()", "void myFunction()", "def myFunction()", "myFunction()"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 7,
+          "question": "Which operator is used for division in C?",
+          "options": ["/", "%", "*", "-"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 8,
+          "question": "What is the output of the following code?\nint x = 5;\nprintf('%d', x++);",
+          "options": ["5", "6", "4", "Error"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 9,
+          "question": "What is the correct syntax to define a constant in C?",
+          "options": ["const x = 10;", "#define x 10", "final int x = 10;", "x = 10;"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 10,
+          "question": "Which data type is used to store single characters in C?",
+          "options": ["char", "int", "float", "string"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 11,
+          "question": "What is the output of the following code?\nint x = 10;\nif (x == 10) {\nprintf('Hello');\n}",
+          "options": ["10", "Error", "Hello", "None"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 12,
+          "question": "What is the correct way to allocate memory dynamically in C?",
+          "options": ["new int", "malloc()", "malloc(sizeof(int))", "allocate()"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 13,
+          "question": "Which symbol is used for dereferencing in C?",
+          "options": ["*", "&", "->", ". "],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 14,
+          "question": "What is the output of the following code?\nint arr[] = {1, 2, 3, 4};\nprintf('%d', arr[2]);",
+          "options": ["1", "2", "3", "4"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 15,
+          "question": "What is the correct way to access the address of a variable in C?",
+          "options": ["addressOf(x)", "getAddress(x)", "&x", "pointer(x)"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 16,
+          "question": "Which keyword is used to exit from a loop in C?",
+          "options": ["stop", "exit", "end", "break"],
+          "correctOption": 3,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 17,
+          "question": "What is the output of the following code?\nint x = 10;\nint y = x++;\nprintf('%d', y);",
+          "options": ["9", "10", "11", "Error"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 18,
+          "question": "Which function is used to read a single character from the keyboard in C?",
+          "options": ["scanf()", "getchar()", "get()", "input()"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 19,
+          "question": "What is the output of the following code?\nint x = 5;\nint y = 3;\nprintf('%d', x / y);",
+          "options": ["1", "1.5", "2", "Error"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 20,
+          "question": "Which keyword is used to define a structure in C?",
+          "options": ["structure", "type", "typedef", "struct"],
+          "correctOption": 3,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 21,
+          "question": "What is the output of the following code?\nint i;\nfor (i = 0; i < 5; i++) {\nprintf('%d', i);\n}",
+          "options": ["01234", "12345", "012345", "123456"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 22,
+          "question": "What is the correct way to declare an array of integers in C?",
+          "options": ["int[] arr;", "int arr[];", "array arr[];", "array<int> arr;"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 23,
+          "question": "What is the output of the following code?\nint x = 10;\nint *ptr = &x;\nprintf('%d', *ptr);",
+          "options": ["10", "0", "Error", "None"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 24,
+          "question": "Which function is used to compare two strings in C?",
+          "options": ["compare()", "strcmp()", "equals()", "strcompare()"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 25,
+          "question": "What is the output of the following code?\nint x = 5;\nint y = 3;\nif (x > y) {\nprintf('Yes');\n} else {\nprintf('No');\n}",
+          "options": ["Yes", "No", "Error", "None"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 26,
+          "question": "What is the correct way to define a pointer variable in C?",
+          "options": ["ptr int;", "int ptr;", "pointer ptr;", "int *ptr;"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 27,
+          "question": "What is the output of the following code?\nint arr[5] = {1, 2, 3};\nprintf('%d', arr[4]);",
+          "options": ["1", "2", "3", "Error"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 28,
+          "question": "What is the correct way to declare a structure in C?",
+          "options": ["structure MyStruct { };", "type MyStruct { };", "struct MyStruct { };", "typedef MyStruct { };"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 29,
+          "question": "What is the output of the following code?\nint x = 5;\nprintf('%d', ++x);",
+          "options": ["5", "6", "Error", "None"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 30,
+          "question": "Which keyword is used to define an enumeration in C?",
+          "options": ["define", "enum", "enumeration", "enumtype"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        }
+      ]
+    },
+    {
+      "name": "C++",
+      "questions": [
+        {
+          "id": 1,
+          "question": "What is the correct syntax to declare a variable in C++?",
+          "options": ["variable x;", "var x;", "int x;", "x = 10;"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 2,
+          "question": "Which symbol is used for comments in C++?",
+          "options": ["//", "#", "/* */", "<!-- -->"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 3,
+          "question": "What is the output of the following code?\ncout << (5 > 3);",
+          "options": ["5", "3", "1", "0"],
+          "correctOption": 2,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 4,
+          "question": "Which header file is required for input and output functions in C++?",
+          "options": ["iostream.h", "stdlib.h", "math.h", "stdio.h"],
+          "correctOption": 3,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 5,
+          "question": "What is the size of 'int' data type in C++?",
+          "options": ["4 bytes", "2 bytes", "8 bytes", "Depends on the compiler"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 6,
+          "question": "How do you declare a function in C++?",
+          "options": ["function myFunction()", "void myFunction()", "def myFunction()", "myFunction()"],
+          "correctOption": 1,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 7,
+          "question": "Which operator is used for division in C++?",
+          "options": ["/", "%", "*", "-"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 8,
+          "question": "What is the output of the following code?\nint x = 5;\ncout << x++;",
+          "options": ["5", "6", "4", "Error"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 9,
+          "question": "What is the correct syntax to define a constant in C++?",
+          "options": ["const x = 10;", "#define x 10", "final int x = 10;", "x = 10;"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 10,
+          "question": "Which data type is used to store single characters in C++?",
+          "options": ["char", "int", "float", "string"],
+          "correctOption": 0,
+          "difficulty": "Easy"
+        },
+        {
+          "id": 11,
+          "question": "What is the output of the following code?\nint x = 10;\nif (x == 10) {\ncout << 'Hello';\n}",
+          "options": ["10", "Error", "Hello", "None"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 12,
+          "question": "What is the correct way to allocate memory dynamically in C++?",
+          "options": ["new int", "malloc()", "malloc(sizeof(int))", "allocate()"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 13,
+          "question": "Which symbol is used for dereferencing in C++?",
+          "options": ["*", "&", "->", ". "],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 14,
+          "question": "What is the output of the following code?\nint arr[] = {1, 2, 3, 4};\ncout << arr[2];",
+          "options": ["1", "2", "3", "4"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 15,
+          "question": "What is the correct way to access the address of a variable in C++?",
+          "options": ["addressOf(x)", "getAddress(x)", "&x", "pointer(x)"],
+          "correctOption": 2,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 16,
+          "question": "Which keyword is used to exit from a loop in C++?",
+          "options": ["stop", "exit", "end", "break"],
+          "correctOption": 3,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 17,
+          "question": "What is the output of the following code?\nint x = 10;\nint y = x++;\ncout << y;",
+          "options": ["9", "10", "11", "Error"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 18,
+          "question": "Which function is used to read a single character from the keyboard in C++?",
+          "options": ["scanf()", "getchar()", "get()", "input()"],
+          "correctOption": 1,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 19,
+          "question": "What is the output of the following code?\nint x = 5;\nint y = 3;\ncout << (x > y ? 'Yes' : 'No');",
+          "options": ["Yes", "No", "Error", "None"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 20,
+          "question": "Which operator is used to access members of a class in C++?",
+          "options": [".", "->", "::", "=>"],
+          "correctOption": 0,
+          "difficulty": "Medium"
+        },
+        {
+          "id": 21,
+          "question": "What is the output of the following code?\nint x = 10;\nwhile (x > 0) {\ncout << x << ' ';\nx--;\n}",
+          "options": ["10 9 8 7 6 5 4 3 2 1", "1 2 3 4 5 6 7 8 9 10", "0", "Error"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 22,
+          "question": "What is the correct syntax to define a class in C++?",
+          "options": ["class MyClass { };", "type MyClass { };", "define class MyClass { };", "Class MyClass { };"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 23,
+          "question": "What is the output of the following code?\nint arr[3] = {1, 2, 3};\ncout << arr[3];",
+          "options": ["1", "2", "3", "Error"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 24,
+          "question": "Which keyword is used to define inheritance in C++?",
+          "options": ["extends", "inherits", "inherit", "class"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 25,
+          "question": "What is the output of the following code?\nint x = 5;\nif (x != 5) {\ncout << 'Yes';\n} else {\ncout << 'No';\n}",
+          "options": ["Yes", "No", "Error", "None"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 26,
+          "question": "Which keyword is used to define a function in C++?",
+          "options": ["method", "func", "function", "def"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 27,
+          "question": "What is the output of the following code?\nint x = 5;\nint *ptr = &x;\ncout << *ptr++;",
+          "options": ["5", "6", "4", "Error"],
+          "correctOption": 0,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 28,
+          "question": "What is the correct syntax to create an object of a class in C++?",
+          "options": ["new MyClass;", "MyClass obj;", "obj = new MyClass();", "MyClass() = obj;"],
+          "correctOption": 1,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 29,
+          "question": "What is the output of the following code?\nint arr[] = {1, 2, 3, 4};\ncout << arr[4];",
+          "options": ["1", "2", "3", "Error"],
+          "correctOption": 3,
+          "difficulty": "Hard"
+        },
+        {
+          "id": 30,
+          "question": "What is the correct way to access a static member of a class in C++?",
+          "options": ["MyClass.staticMember", "MyClass.staticMember()", "MyClass::staticMember", "MyClass->staticMember"],
+          "correctOption": 2,
+          "difficulty": "Hard"
+        }
+      ]
     }
   ]
 }
